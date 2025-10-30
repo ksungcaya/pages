@@ -34,10 +34,54 @@
   .back-to-top.show { display: inline-flex; }
   .back-to-top:hover { filter: brightness(0.95); } .back-to-top:focus { outline: 2px solid #fff; outline-offset: 2px; } @media print { .back-to-top { display: none !important; } }
 
-  /* Toggle: add class="links-only" on <body> to hide QR images and keep clickable text */
-  .links-only .qr img { display:none; }
-  .links-only .qr { padding:6px 8px; }
-  @media print { .page { page-break-after: always; } .wrap { padding:18px 18px; } }
+  .qrbox {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+    margin: 12px 0 0;
+  }
+  .qr {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px 10px;
+  min-height: 90px;
+  display: block;
+  break-inside: avoid;
+  }
+  .qr a {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+  }
+  .qr img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  flex: 0 0 auto;
+  }
+  .qr small {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--muted);
+  max-width: 100%;
+  }
+  .qr a:hover small { text-decoration: underline; }
+
+  /* Links‑only mode: hide images and reflow text */
+  .links-only .qr a { grid-template-columns: 1fr; }
+  .links-only .qr img { display: none; }
+
+  /* Optional: tighter on narrow screens */
+  @media (max-width: 420px) {
+  .qrbox { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
