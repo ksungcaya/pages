@@ -18,10 +18,14 @@
   .note{font-size:12px;color:#333;margin-left:auto}
   section{page-break-inside:avoid;border:1px solid var(--line);border-radius:10px;margin:12px 14px;padding:10px}
   section h2{font-size:15px;margin:0 0 8px 0}
-  .grid{display:grid;grid-template-columns:repeat(2, minmax(280px, 1fr));gap:6px 16px}
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 8px 16px;
+  }
   .item{display:flex;align-items:flex-start;gap:8px}
   .item input[type="checkbox"]{margin-top:3px;transform:scale(1.1)}
-  .label{flex:1}
+  .label{flex:1;min-width: 0; overflow-wrap: anywhere;}
   .badge{font-size:10px;color:#0b6d6d;border:1px solid #9bc;border-radius:999px;padding:1px 6px;margin-left:6px;white-space:nowrap}
   .opt{opacity:.9}
   .qty{font-size:12px;color:#333;white-space:nowrap;margin-left:6px}
@@ -43,6 +47,88 @@
     /* Ensure guide sections break nicely on paper */
     #guide section{page-break-inside:avoid}
   }
+
+  /* ——— Mobile responsiveness ——— */
+  * { -webkit-tap-highlight-color: rgba(0,0,0,0.08); }
+
+  @media (max-width: 880px){
+    /* Ease into 2 columns on tablets/large phones */
+    .grid{ grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+    .wrap{ padding: 8px 12px; }
+    section{ margin: 10px 12px; }
+  }
+
+  @media (max-width: 640px){
+    /* Header + spacing */
+    .wrap{ padding: 8px 10px; }
+    h1{ font-size: 18px; margin-bottom: 4px; }
+    .sub{ font-size: 11px; }
+    .meta{ gap: 6px; }
+    .meta span{ padding: 2px 6px; font-size: 11px; }
+
+    /* Controls: search full width, chips/buttons wrap and scroll if needed */
+    .controls{ gap: 6px; padding-bottom: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .controls::-webkit-scrollbar{ height: 0; } /* hide scrollbar on iOS/Chrome mobile */
+    .controls input[type="search"]{ flex: 1 0 100%; min-width: 0; }
+    .controls .note{ flex: 1 0 100%; margin-left: 0; }
+    button,.chip{ padding: 9px 10px; font-size: 14px; }
+
+    /* Checklist items: larger tap targets + bigger checkboxes */
+    .grid{ grid-template-columns: 1fr; gap: 8px; }
+    .item{ padding: 6px 2px; gap: 1px; }
+    .item input[type="checkbox"]{ transform: scale(1.25); margin-top: 4px; }
+
+    /* Qty fields: easier to tap; avoid iOS zoom by using >=16px */
+    .qty{ font-size: 14px; }
+    .qty input{ width: 3.6em; font-size: 16px; padding: 4px 6px; }
+
+    /* Details/notes: larger touch area */
+    details summary{ font-size: 15px; line-height: 1.8; }
+
+    /* Sections tighter on mobile */
+    section{ margin: 10px 8px; padding: 10px; }
+  }
+
+  @media (max-width: 380px){
+    /* Extra small phones */
+    .wrap{ padding: 6px 8px; }
+    .controls{ gap: 5px; }
+    button,.chip{ padding: 8px 9px; font-size: 13px; }
+    .meta span{ font-size: 10px; }
+  }
+
+  @media (max-width: 640px){
+    header{ position: sticky; top: 0; background: #fff; z-index: 10; }
+  }
+
+  /* 1 column on phones (tweak 680–740px to taste) */
+  @media (max-width: 700px) {
+    .grid{ grid-template-columns: 1fr; }
+    .item{
+      display: grid;
+      grid-template-columns: 26px 1fr;  /* left col ~checkbox width */
+      grid-auto-rows: auto;
+      align-items: start;
+    }
+    .item input[type="checkbox"]{
+      grid-column: 1; grid-row: 1;
+      transform: scale(1.2);
+      margin-top: 5px; /* nudge for vertical alignment */
+    }
+    .item .label{
+      grid-column: 2; grid-row: 1;
+      min-width: 0;
+      overflow-wrap: anywhere; /* prevent overflow/overlap */
+    }
+    .item .qty{
+      grid-column: 2; grid-row: 2;  /* sits under label, indented */
+      margin: 6px 0 0 0;
+      text-align: left;
+      font-size: 16px; /* avoid iOS zoom */
+    }
+    .qty input{ font-size: 16px; }
+}
+
 
 </style>
 </head>
