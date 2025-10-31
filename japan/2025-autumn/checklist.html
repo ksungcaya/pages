@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Japan Autumn Packing Checklist — Light + Save/Share</title>
+<style>
+  :root{ --text:#111; --muted:#555; --line:#d7dbe0; --hl:#f6f7f9; --accent:#0b6d6d; }
+  html,body{background:#fff;color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;line-height:1.35;margin:0}
+  header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:10}
+  .wrap{max-width:960px;margin:0 auto;padding:10px 14px}
+  h1{font-size:20px;margin:0 0 6px 0}
+  .sub{color:var(--muted);font-size:12px;margin:0 0 8px}
+  .controls{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+  input[type="search"]{flex:1 1 240px;padding:8px 10px;border:1px solid var(--line);border-radius:10px}
+  button,.chip{background:var(--hl);border:1px solid var(--line);color:var(--text);padding:8px 10px;border-radius:10px;font-size:13px;cursor:pointer}
+  button:hover,.chip:hover{border-color:#cbd3da}
+  .note{font-size:12px;color:#333;margin-left:auto}
+  section{page-break-inside:avoid;border:1px solid var(--line);border-radius:10px;margin:12px 14px;padding:10px}
+  section h2{font-size:15px;margin:0 0 8px 0}
+  .grid{display:grid;grid-template-columns:repeat(2, minmax(280px, 1fr));gap:6px 16px}
+  .item{display:flex;align-items:flex-start;gap:8px}
+  .item input[type="checkbox"]{margin-top:3px;transform:scale(1.1)}
+  .label{flex:1}
+  .badge{font-size:10px;color:#0b6d6d;border:1px solid #9bc;border-radius:999px;padding:1px 6px;margin-left:6px;white-space:nowrap}
+  .opt{opacity:.9}
+  .qty{font-size:12px;color:#333;white-space:nowrap;margin-left:6px}
+  .qty input{width:3.2em;border:1px solid var(--line);padding:2px 4px;border-radius:6px}
+  details{border-top:1px dashed var(--line);margin-top:6px;padding-top:6px}
+  details summary{cursor:pointer;color:#333;font-weight:600}
+  small.note{color:#333;display:block;margin-top:4px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;color:#333;font-size:12px;margin:6px 0}
+  .meta span{padding:2px 8px;border:1px solid var(--line);border-radius:999px;background:var(--hl)}
+  .status{font-size:12px;color:#0b6d6d;margin-left:8px}
+  @media print{
+    header{position:static}
+    .controls{display:none}
+    .wrap{padding:0 8px}
+    section{margin:10px 0}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    @page{size:auto; margin:12mm}
+
+    /* Ensure guide sections break nicely on paper */
+    #guide section{page-break-inside:avoid}
+  }
+
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Japan Autumn Packing Checklist</h1>
+    <div class="sub">Route: Osaka → Kyoto → Kiso (Magome–Tsumago) → Tokyo/Fuji/Yokohama · Late Nov–early Dec</div>
+    <div class="meta">
+      <span>Typical temps: 6–15°C day</span>
+      <span>Kawaguchiko/Ashikaga evenings: ~0–8°C</span>
+      <span>Layer smart; top up at Uniqlo/GU/drugstores</span>
+    </div>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search (e.g., heattech, patches, umbrella)" />
+      <label class="chip"><input type="checkbox" id="showHer" checked> Show “For her”</label>
+      <label class="chip"><input type="checkbox" id="showHim" checked> Show “For him”</label>
+      <label class="chip"><input type="checkbox" id="showOptional" checked> Show optional</label>
+      <label class="chip"><input type="checkbox" id="showBuyJP" checked> Show “Buy in Japan”</label>
+      <button id="checkAll">Check shown</button>
+      <button id="uncheckAll">Uncheck shown</button>
+      <button id="resetBtn">Reset</button>
+      <button id="exportBtn">Export JSON</button>
+      <button id="importBtn">Import JSON</button>
+      <button id="shareBtn">Copy share URL</button>
+      <span class="note">Saves locally; share URL embeds current state.</span>
+      <span id="status" class="status" aria-live="polite"></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="app">
+  <div style="color:#666;font-size:13px">Loading checklist…</div>
+</main>
+
+<noscript>
+  <div class="wrap" style="color:#b00;margin-top:8px">This page needs JavaScript enabled to render the checklist.</div>
+</noscript>
+
+<section id="guide" class="wrap">
+  <section>
+    <h2>Trip Guide & Reference</h2>
+    <div class="meta">
+      <span>Late‑Nov: cool days, cold nights</span>
+      <span>Fuji/Ashikaga evenings ~0–8°C</span>
+      <span>Layer smart; buy extras in Japan</span>
+    </div>
+    <div class="controls" style="margin-top:6px">
+      <button id="expandGuides">Expand all</button>
+      <button id="collapseGuides">Collapse all</button>
+      <span class="note">Sections below are printable.</span>
+    </div>
+
+    <details id="g-weather" open>
+      <summary>Weather & layering (quick)</summary>
+      <ul class="compact">
+        <li>Osaka/Kyoto/Tokyo days ~6–15°C; nights 3–8°C. Fuji/Ashikaga evenings can be near freezing with wind.</li>
+        <li>Layers formula: base tee + light midlayer (fleece/knit) + packable insulated jacket + hooded shell.</li>
+        <li>Footing: leaf‑slick on Minoo and Nakasendo—wear grippy, broken‑in waterproof sneakers/light hikers.</li>
+      </ul>
+    </details>
+
+    <details id="g-footcare" open>
+      <summary>Sore feet & legs: what to buy + routine</summary>
+      <div style="margin-top:6px">
+        <strong>Drugstores (Matsumoto Kiyoshi/Sundrug/Welcia/Tomod’s):</strong>
+        <ul class="compact">
+          <li>Salonpas / Roihi‑Tsuboko patches (warming) ¥400–¥900</li>
+          <li>Loxonin S gel / Vantelin Kowa gel (muscle/joint) ¥1,100–¥1,800</li>
+          <li>Cooling leg sheets (Kyusoku Jikan) ¥500–¥900</li>
+          <li>Kairo heat packs incl. toe warmers (shoe use) ¥300–¥700 multi‑pack</li>
+          <li>MediQttO overnight sleeves; hydrocolloid blister bandages; foot powder</li>
+        </ul>
+        <strong>Sports/others:</strong>
+        <ul class="compact">
+          <li>Insoles (Sorbothane/ABC‑MART), ZAMST ankle/knee supports, massage ball/roller (DAISO)</li>
+        </ul>
+        <strong>5‑minute routine:</strong>
+        <ul class="compact">
+          <li>AM: friction balm on hotspots; liner/toe socks; optional compression sleeves.</li>
+          <li>Mid‑day: swap to a dry pair of socks; quick calf stretch.</li>
+          <li>PM: warm soak + stretches; cooling sheets; elevate feet 10–15 min.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details id="g-shops">
+      <summary>Where to buy along your route (easy stops)</summary>
+      <ul class="compact">
+        <li><strong>Osaka Umeda (11/20–21):</strong> Grand Front/Yodobashi → Uniqlo, GU, Mont‑Bell; drugstores/Don Quijote.</li>
+        <li><strong>Kyoto Shijo–Kawaramachi (11/22–24):</strong> Uniqlo/GU/MUJI; many drugstores on Shijo/Kawaramachi.</li>
+        <li><strong>Tokyo Ueno/Ameyoko (11/26, 11/28–12/1):</strong> drugstores, GU/Uniqlo, ABC‑MART; Akihabara Yodobashi.</li>
+        <li><strong>Yokohama Minato Mirai (11/30):</strong> MARK IS/Queen’s Square → Uniqlo/MUJI; in‑mall drugstores.</li>
+      </ul>
+    </details>
+
+    <details id="g-laundry">
+      <summary>Laundry plan (pack less, wash mid‑trip)</summary>
+      <ul class="compact">
+        <li>Most hotels have coin laundry. Best windows: Kyoto evenings (11/23–24) or Tokyo night (11/28).</li>
+        <li>Bring detergent sheets or buy a small “Attack” pouch; use a mesh bag; quick‑dry socks/underwear help.</li>
+      </ul>
+    </details>
+
+    <details id="g-meds">
+      <summary>Medication notes (important)</summary>
+      <ul class="compact">
+        <li>Carry prescriptions in original containers with scripts.</li>
+        <li>Stimulants (e.g., Adderall) are prohibited in Japan.</li>
+        <li>For restricted meds or >1‑month supply, check PMDA “Yakkan Shomei.”</li>
+        <li>Some decongestants differ; buy locally if needed.</li>
+      </ul>
+    </details>
+
+    <details id="g-sizing">
+      <summary>Sizing & footwear</summary>
+      <ul class="compact">
+        <li>Japanese sizes run small. Men’s US 11+ / Women’s US 10+ shoes are harder to find—bring your main pair.</li>
+        <li>Uniqlo often stocks tall/XL+ at flagship stores (Umeda, Shinjuku, Ginza, etc.).</li>
+      </ul>
+    </details>
+
+    <details id="g-massage">
+      <summary>Massage/soak breaks</summary>
+      <ul class="compact">
+        <li>Foot massage chains with easy walk‑ins: Re.Ra.Ku, Raffine, Queensway (40–60 min after long days).</li>
+        <li>Fun foot bath: Randen Arashiyama Station’s ashiyu (small fee) after the bamboo/Sagano walk.</li>
+        <li>Hotel bath: pick up Bath Roman/Epsom‑style salts from a drugstore for nightly soaks.</li>
+      </ul>
+    </details>
+
+    <details id="g-extras">
+      <summary>Small extras that pay off</summary>
+      <ul class="compact">
+        <li>Refillable 500–750 ml bottle; small thermos for night illuminations.</li>
+        <li>Spare socks + blister kit in a zip bag; pocket tissues/wet wipes.</li>
+        <li>Packable tote; lip balm + hand cream (air is dry).</li>
+      </ul>
+    </details>
+  </section>
+</section>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'jp-autumn-pack-v2';
+  const $ = s => document.querySelector(s);
+  const app = $('#app');
+  const state = { checked:{}, qty:{}, filters:{
+    showHer:true, showHim:true, showOptional:true, showBuyJP:true, search:''
+  }};
+
+  // Escape helper (fix)
+  function esc(s){ return String(s).replace(/[&<>"']/g, c=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c])); }
+
+  // Data
+  const data = [
+    { id:'quick-pack', title:'Quick: Pack Now', items:[
+      I('wp-shoes','Waterproof sneakers/light hikers (broken‑in, grippy sole)'),
+      I('rain-shell','Hooded rain/wind shell'),
+      I('pants-2','2 pants (1 tech/softshell + 1 casual)'),
+      I('base-tees-3','3 moisture‑wicking base tees',3),
+      I('midlayers-2','2 light midlayers (fleece/knit/hoodie)',2),
+      I('underwear','Underwear',6,'pairs'),
+      I('socks','Socks (mix merino/hiking + everyday)',5,'pairs'),
+      I('beanie-scarf-gloves','Beanie + scarf/neck gaiter + touchscreen gloves'),
+      I('meds-mini','Small personal meds kit'),
+      I('blister-kit','Blister kit (hydrocolloid, moleskin, tape)'),
+      I('daypack','15–20L daypack (rain cover if possible)'),
+      I('compact-umbrella','Compact umbrella')
+    ]},
+    { id:'quick-buy', title:'Quick: Buy in Japan (Day 1–2 if needed)', items:[
+      I('heattech','Uniqlo HEATTECH (Extra Warm) tops/leggings',null,null,['buy-jp']),
+      I('uld','Uniqlo Ultra Light Down jacket/vest',null,null,['buy-jp']),
+      I('fleece','GU/MUJI fleece or knit',null,null,['buy-jp']),
+      I('compression','Compression calf sleeves/socks (MediQttO/sports)',null,null,['buy-jp']),
+      I('patches','Pain‑relief patches (Salonpas / Roihi‑Tsuboko)',null,null,['buy-jp']),
+      I('gel','Topical gel (Loxonin S / Vantelin Kowa)',null,null,['buy-jp']),
+      I('kairo','Kairo heat packs incl. toe warmers',null,null,['buy-jp']),
+      I('insoles','Supportive insoles (Sorbothane/ABC‑MART)',null,null,['buy-jp'])
+    ]},
+    { id:'clothing', title:'Clothing (layers for 6–15°C days; colder nights)', items:[
+      I('tops-tee','Base tees (1 merino if you run cold)',3),
+      I('midlayer','Light midlayers (fleece/light knit)',2),
+      I('insulated','Packable insulated jacket (down/synthetic)',null,null,['optional']),
+      I('shell','Windproof/waterproof shell with hood'),
+      I('bottoms','Pants: 1 tech/softshell + 1 casual/dress'),
+      I('tights','Warm tights/leggings (night illuminations)',null,null,['optional']),
+      I('underwear2','Underwear',6,'pairs'),
+      I('socks2','Socks (2 hiking/merino + 2–3 everyday)',5,'pairs'),
+      I('liners','Liner/toe socks (blister prevention)',2,'pairs',['optional']),
+      I('sleep','Sleep set + light lounge pants/leggings'),
+      I('acc-warm','Beanie/hat + scarf/neck gaiter + gloves'),
+      I('sun','Sunglasses; lip balm; hand cream'),
+      I('umbrella-cap','Compact umbrella + cap'),
+      I('footwear1','Main shoes: waterproof sneakers/light hikers'),
+      I('footwear2','2nd shoes (sneakers/loafers) to rotate',null,null,['optional']),
+      I('slippers','Room slippers/slides (ryokan)',null,null,['optional']),
+      I('her-heattech','For her: HEATTECH top/leggings',null,null,['her']),
+      I('her-dress','For her: casual dress/skirt + tights (dinners)',null,null,['her','optional']),
+      I('him-top','For him: collared shirt or fine‑gauge sweater',null,null,['him','optional'])
+    ]},
+    { id:'daypack', title:'Daypack + hike add‑ons', items:[
+      I('pack-20l','15–20L daypack + rain cover'),
+      I('bottle','500–750 ml water bottle'),
+      I('thermos','Small thermos/tumbler (night events)',null,null,['optional']),
+      I('towel','Microfibre towel',null,null,['optional']),
+      I('tissues','Pocket tissues + wet wipes'),
+      I('light','Headlamp or phone light',null,null,['optional']),
+      I('sitpad','Compact sit pad/plastic bag (cold benches)',null,null,['optional']),
+      I('trekking','Folding trekking poles (knee comfort)',null,null,['optional']),
+      I('spare-socks','Spare socks in zip bag (mid‑day change)')
+    ]},
+    { id:'meds', title:'Travel wellness / medicines', note:'Decongestants differ in Japan—buy locally if needed. Stimulants (e.g., Adderall) are prohibited. For >1 month or restricted meds, check PMDA “Yakkan Shomei.”', items:[
+      I('pain','Pain/fever: ibuprofen/naproxen + acetaminophen'),
+      I('stomach','Stomach: loperamide; bismuth/simethicone; mild laxative; probiotics'),
+      I('cold','Colds/allergy: antihistamine; throat lozenges; saline spray'),
+      I('motion','Motion: dimenhydrinate/meclizine (if needed)',null,null,['optional']),
+      I('firstaid','First aid: plasters; hydrocolloid bandages; antiseptic wipes; tape'),
+      I('tools','Tweezers; small scissors (check airline rules)',null,null,['optional']),
+      I('skin','Eye drops; SPF 30+; lip balm; moisturizer/hand cream'),
+      I('footcare','Foot care: friction balm; moleskin; leukotape/kinesio'),
+      I('ors','Oral rehydration salts (or buy OS‑1 in Japan)'),
+      I('sleep','Melatonin (if you use it)',null,null,['optional']),
+      I('rx','Prescription meds (original containers + scripts)')
+    ]},
+    { id:'recovery', title:'Sore feet & legs recovery (buy in Japan)', note:'Routine: AM friction balm + liner/toe socks; midday sock change; PM warm soak, cooling sheets, elevate 10–15 min.', items:[
+      I('patch','Pain‑relief patches (Salonpas / Roihi‑Tsuboko)',null,null,['buy-jp']),
+      I('gel2','Topical gel (Loxonin S / Vantelin Kowa)',null,null,['buy-jp']),
+      I('cooling','Cooling leg/foot sheets (Kyusoku Jikan etc.)',null,null,['buy-jp']),
+      I('kairo2','Kairo heat packs incl. toe warmers',null,null,['buy-jp']),
+      I('compress','Compression: MediQttO or sports calf sleeves',null,null,['buy-jp']),
+      I('blister','Hydrocolloid bandages / liquid bandage / foot powder',null,null,['buy-jp']),
+      I('insoles2','Supportive insoles (Sorbothane/ABC‑MART)',null,null,['buy-jp']),
+      I('supports','Ankle/knee supports (ZAMST)',null,null,['buy-jp','optional']),
+      I('rollers','Foot roller / massage ball (DAISO)',null,null,['buy-jp','optional']),
+      I('bath','Bath salts (Bath Roman/Epsom style)',null,null,['buy-jp','optional'])
+    ]},
+    { id:'laundry', title:'Laundry plan & small extras', note:'Most hotels have coin laundry. Good wash windows: Kyoto 11/23–24 evenings; Tokyo 11/28 night.', items:[
+      I('detergent','Detergent sheets or small “Attack” pouch'),
+      I('mesh','Mesh laundry bag'),
+      I('line','Travel clothesline/clips',null,null,['optional']),
+      I('tote','Packable tote/shopping bag'),
+      I('masks','A few lightweight masks (cold/wind/illness)',null,null,['optional'])
+    ]},
+    { id:'shops', title:'Where to pick things up (reference)', info:true, note:'Umeda (Osaka), Shijo–Kawaramachi (Kyoto), Ueno/Ameyoko & Akihabara (Tokyo), Minato Mirai (Yokohama): Uniqlo/GU/MUJI, drugstores, ABC‑MART, Mont‑Bell.', items:[] }
+  ];
+  function I(id,label,qty,unit,tags){ return {id,label,qty,unit,tags:tags||['both']}; }
+
+  // Load: URL first, else local
+  const fromUrl = getUrlState();
+  if(fromUrl){ try{ applyLoaded(fromUrl); toast('Loaded from URL'); }catch(e){} }
+  else { const saved = load(); if(saved){ Object.assign(state, saved); } }
+
+  // Init controls
+  $('#search').value = state.filters.search||'';
+  ['showHer','showHim','showOptional','showBuyJP'].forEach(id=>{
+    $('#'+id).checked = !!state.filters[id];
+    $('#'+id).addEventListener('change', e=>{
+      state.filters[id] = e.target.checked; save(); render();
+    });
+  });
+  $('#search').addEventListener('input', e=>{
+    state.filters.search = e.target.value; save(); render();
+  });
+
+  // Render
+  function render(){
+    app.innerHTML='';
+    data.forEach(section=>{
+      const sec = document.createElement('section');
+      const h2 = document.createElement('h2'); h2.textContent = section.title; sec.appendChild(h2);
+
+      if(section.info){
+        const d = document.createElement('div');
+        d.style.fontSize='13px'; d.style.color='#222'; d.textContent = section.note||'';
+        sec.appendChild(d); app.appendChild(sec); return;
+      }
+
+      const grid = document.createElement('div'); grid.className='grid';
+
+      section.items.filter(it=>filterItem(it)).forEach(it=>{
+        const id = `${section.id}:${it.id}`;
+        const wrap = document.createElement('label');
+        wrap.className = 'item' + (has(it,'optional')?' opt':'');
+        wrap.innerHTML = `
+          <input type="checkbox" data-id="${id}" ${state.checked[id]?'checked':''}/>
+          <span class="label">${esc(it.label)}
+            ${has(it,'buy-jp')?'<span class="badge">Buy in JP</span>':''}
+            ${has(it,'her')?'<span class="badge">Her</span>':''}
+            ${has(it,'him')?'<span class="badge">Him</span>':''}
+            ${has(it,'optional')?'<span class="badge">Optional</span>':''}
+          </span>
+        `;
+        if(typeof it.qty!=='undefined'){
+          const qv = state.qty[id] ?? it.qty;
+          const qty = document.createElement('span');
+          qty.className='qty';
+          qty.innerHTML = `Qty <input type="number" min="0" step="1" value="${qv}" data-qty="${id}"> ${it.unit?esc(it.unit):''}`;
+          wrap.appendChild(qty);
+        }
+        grid.appendChild(wrap);
+      });
+
+      if((section.note||'') && section.items.length){
+        const det = document.createElement('details');
+        det.innerHTML = `<summary>Notes</summary><small class="note">${esc(section.note)}</small>`;
+        sec.appendChild(det);
+      }
+
+      sec.appendChild(grid);
+      app.appendChild(sec);
+    });
+
+    // Wire events
+    app.querySelectorAll('input[type=checkbox][data-id]').forEach(cb=>{
+      cb.addEventListener('change', e=>{
+        const id = e.target.getAttribute('data-id');
+        state.checked[id] = e.target.checked; save();
+      });
+    });
+    app.querySelectorAll('input[type=number][data-qty]').forEach(inp=>{
+      inp.addEventListener('change', e=>{
+        const id = e.target.getAttribute('data-qty');
+        const v = parseInt(e.target.value||'0',10);
+        state.qty[id] = isNaN(v)?0:v; save();
+      });
+    });
+  }
+
+  function filterItem(it){
+    if(has(it,'her') && !state.filters.showHer) return false;
+    if(has(it,'him') && !state.filters.showHim) return false;
+    if(has(it,'optional') && !state.filters.showOptional) return false;
+    if(has(it,'buy-jp') && !state.filters.showBuyJP) return false;
+    const q = (state.filters.search||'').toLowerCase();
+    if(!q) return true;
+    return it.label.toLowerCase().includes(q);
+  }
+  function has(it,tag){ return (it.tags||[]).includes(tag); }
+
+  // Save / load
+  function save(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+    const snapshot = snapshotState();
+    const enc = encode64(JSON.stringify(snapshot));
+    setUrlState(enc);
+    toast('Saved');
+  }
+  function load(){
+    try{ const raw = localStorage.getItem(STORAGE_KEY); return raw? JSON.parse(raw):null; }catch(e){ return null; }
+  }
+  function snapshotState(){ return { c:state.checked, q:state.qty, f:state.filters, v:'v2' }; }
+  function applyLoaded(snap){
+    state.checked = snap.c||{};
+    state.qty = snap.q||{};
+    state.filters = Object.assign(state.filters, snap.f||{});
+  }
+
+  // URL share helpers
+  function setUrlState(encoded){
+    const url = new URL(location.href);
+    url.hash = 's=' + encoded;
+    history.replaceState(null,'',url.toString());
+  }
+  function getUrlState(){
+    const h = location.hash||'';
+    const m = h.match(/[#&]?s=([^&]+)/);
+    if(!m) return null;
+    try{
+      const json = decode64(decodeURIComponent(m[1]));
+      return JSON.parse(json);
+    }catch(e){ return null; }
+  }
+  function clearUrlState(){
+    const url = new URL(location.href);
+    url.hash=''; history.replaceState(null,'',url.toString());
+  }
+
+  // Base64 (Unicode-safe)
+  function encode64(str){ return btoa(unescape(encodeURIComponent(str))); }
+  function decode64(str){ return decodeURIComponent(escape(atob(str))); }
+
+  // Controls
+  $('#checkAll').addEventListener('click', ()=>{
+    app.querySelectorAll('input[type=checkbox][data-id]').forEach(cb=>{
+      cb.checked = true; state.checked[cb.getAttribute('data-id')] = true;
+    }); save();
+  });
+  $('#uncheckAll').addEventListener('click', ()=>{
+    app.querySelectorAll('input[type=checkbox][data-id]').forEach(cb=>{
+      cb.checked = false; state.checked[cb.getAttribute('data-id')] = false;
+    }); save();
+  });
+  $('#resetBtn').addEventListener('click', ()=>{
+    if(!confirm('Reset all items and filters to defaults?')) return;
+    state.checked = {};
+    state.qty = {};
+    state.filters = { showHer:true, showHim:true, showOptional:true, showBuyJP:true, search:'' };
+    clearUrlState();
+    localStorage.removeItem(STORAGE_KEY);
+    $('#search').value='';
+    render(); toast('Reset');
+  });
+  $('#exportBtn').addEventListener('click', ()=>{
+    const blob = new Blob([JSON.stringify(snapshotState(),null,2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href=url; a.download='japan-autumn-packlist.json'; a.click(); URL.revokeObjectURL(url);
+  });
+  $('#importBtn').addEventListener('click', ()=>{
+    const inp = document.createElement('input');
+    inp.type='file'; inp.accept='application/json';
+    inp.onchange = async () =>{
+      const f = inp.files[0]; if(!f) return;
+      try{
+        const snap = JSON.parse(await f.text());
+        applyLoaded(snap);
+        $('#search').value = state.filters.search||'';
+        render(); save(); toast('Imported');
+      }catch(e){ alert('Import failed'); }
+    };
+    inp.click();
+  });
+  $('#shareBtn').addEventListener('click', ()=>{
+    const enc = encode64(JSON.stringify(snapshotState()));
+    const url = new URL(location.href); url.hash = 's=' + enc;
+    navigator.clipboard.writeText(url.toString()).then(()=>toast('Share URL copied')).catch(()=>{
+      prompt('Copy this URL', url.toString());
+    });
+  });
+
+  function toast(msg){
+    const el = document.getElementById('status');
+    el.textContent = msg;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(()=>{ el.textContent=''; }, 900);
+  }
+
+  render();
+})();
+</script>
+
+<script>
+  // Expand/Collapse all guides
+  (function(){
+    const qs = s => document.querySelectorAll(s);
+    const openAll = (v=true)=>qs('#guide details').forEach(d=>d.open=v);
+    const btnExp = document.getElementById('expandGuides');
+    const btnCol = document.getElementById('collapseGuides');
+    if(btnExp) btnExp.addEventListener('click', ()=>openAll(true));
+    if(btnCol) btnCol.addEventListener('click', ()=>openAll(false));
+    // Auto-open for print, restore after
+    let prev = [];
+    function remember(){ prev = Array.from(qs('#guide details')).map(d=>d.open); }
+    function restore(){ qs('#guide details').forEach((d,i)=>d.open = prev[i]); }
+    window.addEventListener('beforeprint', ()=>{ remember(); openAll(true); });
+    window.addEventListener('afterprint', restore);
+  })();
+</script>
+</body>
+</html>
