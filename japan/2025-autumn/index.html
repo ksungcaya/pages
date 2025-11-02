@@ -104,12 +104,14 @@
 
     .tip {
       color: var(--muted);
+      margin-bottom: 25px;
     }
 
     /* TOC styling */
     .toc {
       column-width: 360px;
       column-gap: 28px;
+      max-width: 100%;
     }
 
     .toc>li {
@@ -129,6 +131,10 @@
 
     .toc ul {
       margin: 2px 0 6px 18px;
+      columns: 2;
+      column-gap: 24px;
+      column-fill: balance;
+      margin: 0; padding: 0; list-style: none;
     }
 
     /* Back-to-top button */
@@ -417,6 +423,172 @@
         page-break-inside: avoid;
       }
     }
+
+    /* Nearby Stores: icon chips + tidy lists */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 12px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 11px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      background: #fff;
+      color: inherit;
+      text-decoration: none;
+      font-size: 13px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, .03);
+    }
+
+    .chip:hover {
+      filter: brightness(0.98);
+    }
+
+    .chip .i {
+      font-size: 14px;
+    }
+
+    .chip--drug {
+      background: #fff6f6;
+      border-color: #ffdcdc;
+    }
+
+    .chip--pharm {
+      background: #f7f4ff;
+      border-color: #e3dcff;
+    }
+
+    .chip--super {
+      background: #f4fff6;
+      border-color: #d8f0e4;
+    }
+
+    .chip--konbini {
+      background: #f4fbff;
+      border-color: #d8eaff;
+    }
+
+    .chip--donki {
+      background: #fffdf0;
+      border-color: #f3e9a4;
+    }
+
+    .chip--hyaku {
+      background: #f7f7f7;
+      border-color: #e3e3e3;
+    }
+
+    .poi-list {
+      margin: 6px 0 25px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .poi-list li {
+      margin: 6px 0;
+    }
+
+    .poi-name {
+      font-weight: 600;
+    }
+
+    .poi-badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 6px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .poi-actions a {
+      margin-left: 10px;
+      font-size: 13px;
+      text-decoration: none;
+      border-bottom: 1px dotted #bbb;
+      color: inherit;
+    }
+
+    .poi-actions a:hover {
+      text-decoration: underline;
+    }
+
+    .tip {
+      color: var(--muted);
+    }
+
+    .rest-list {
+      margin: 8px 0 25px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .rest-item {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px 12px;
+      margin: 8px 0;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .rest-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .rest-name {
+      font-weight: 700;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 6px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .rest-meta {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .rest-actions {
+      margin-top: 6px;
+    }
+
+    .rest-actions a {
+      margin-right: 12px;
+      font-size: 13px;
+      text-decoration: none;
+      border-bottom: 1px dotted #bbb;
+      color: inherit;
+    }
+
+    .rest-actions a:hover {
+      text-decoration: underline;
+    }
+
+    @media print {
+      .rest-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
   </style>
 </head>
 
@@ -465,6 +637,8 @@
         <li><a href="#day-12">Day 12 — Mon Dec 1 — Tokyo mop‑up + packing</a></li>
         <li><a href="#day-13">Day 13 — Tue Dec 2 — Departure (Narita T2)</a></li>
         <li><a href="#next-steps">Next‑step checklist</a></li>
+        <li><a href="#nearby-stores">Nearby Stores (≤ ~1 km)</a></li>
+        <li><a href="#wagyu">A5 Wagyu near your hotels (value picks)</a></li>
       </ul>
     </section>
 
@@ -1454,6 +1628,327 @@
           </a>
         </div>
       </div>
+    </section>
+
+    <!-- Nearby Stores (≤ ~1 km) -->
+    <section class="page">
+      <div class="head">
+        <h2 id="nearby-stores">Nearby Stores (≤ ~1 km)</h2>
+      </div>
+      <p class="tip">Tip: after opening a map, tap the walking icon for accurate time. Depachika (department‑store food
+        halls) = best grab‑and‑go meals.</p>
+
+      <!-- Osaka — APA Hotel & Resort Ōsaka Umeda‑eki Tower -->
+      <h3>Osaka — APA Hotel &amp; Resort Ōsaka Umeda‑eki Tower</h3>
+      <div class="chip-row">
+        <a class="chip chip--drug" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%83%89%E3%83%A9%E3%83%83%E3%82%B0%E3%82%B9%E3%83%88%E3%82%A2+near+APA+Hotel+%26+Resort+Osaka+Umeda-eki+Tower"><span
+            class="i">💊</span>Drugstores</a>
+        <a class="chip chip--pharm" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E8%AA%BF%E5%89%A4%E8%96%AC%E5%B1%80+near+APA+Hotel+%26+Resort+Osaka+Umeda-eki+Tower"><span
+            class="i">🧪</span>Pharmacies</a>
+        <a class="chip chip--super" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC+near+APA+Hotel+%26+Resort+Osaka+Umeda-eki+Tower"><span
+            class="i">🛒</span>Supermarkets</a>
+        <a class="chip chip--konbini" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8B+near+APA+Hotel+%26+Resort+Osaka+Umeda-eki+Tower"><span
+            class="i">🏪</span>Convenience</a>
+        <a class="chip chip--donki" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%83%89%E3%83%B3%E3%83%BB%E3%82%AD%E3%83%9B%E3%83%BC%E3%83%86+%E6%A2%85%E7%94%B0"><span
+            class="i">🐧</span>Don Quijote</a>
+        <a class="chip chip--hyaku" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=100%E5%86%86%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97+%E6%A2%85%E7%94%B0"><span
+            class="i">💯</span>100‑yen shops</a>
+      </div>
+      <ul class="poi-list">
+        <li>
+          <span class="poi-name">Hankyu Umeda Food Hall</span><span class="poi-badge">depachika</span>
+          <span class="poi-actions"><a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/?api=1&query=Hankyu+Umeda+Food+Hall">Open map</a></span>
+        </li>
+        <li>
+          <span class="poi-name">Hanshin Umeda Food Hall</span><span class="poi-badge">depachika</span>
+          <span class="poi-actions"><a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/?api=1&query=Hanshin+Umeda+Food+Hall">Open map</a></span>
+        </li>
+        <li>
+          <span class="poi-name">Seijo Ishii LUCUA Osaka</span><span class="poi-badge">gourmet supermarket</span>
+          <span class="poi-actions"><a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/?api=1&query=Seijo+Ishii+LUCUA+Osaka">Open map</a></span>
+        </li>
+      </ul>
+
+      <!-- Kyoto — APA Hotel Kyoto Gion EXCELLENT -->
+      <h3>Kyoto — APA Hotel Kyoto Gion EXCELLENT</h3>
+      <div class="chip-row">
+        <a class="chip chip--drug" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%83%89%E3%83%A9%E3%83%83%E3%82%B0%E3%82%B9%E3%83%88%E3%82%A2+near+APA+Hotel+Kyoto+Gion+EXCELLENT"><span
+            class="i">💊</span>Drugstores</a>
+        <a class="chip chip--pharm" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E8%AA%BF%E5%89%A4%E8%96%AC%E5%B1%80+near+APA+Hotel+Kyoto+Gion+EXCELLENT"><span
+            class="i">🧪</span>Pharmacies</a>
+        <a class="chip chip--super" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC+near+APA+Hotel+Kyoto+Gion+EXCELLENT"><span
+            class="i">🛒</span>Supermarkets</a>
+        <a class="chip chip--konbini" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8B+near+APA+Hotel+Kyoto+Gion+EXCELLENT"><span
+            class="i">🏪</span>Convenience</a>
+        <a class="chip chip--donki" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%83%89%E3%83%B3%E3%83%BB%E3%82%AD%E3%83%9B%E3%83%BC%E3%83%86+%E5%B7%9D%E5%8E%9F%E7%94%BA"><span
+            class="i">🐧</span>Don Quijote</a>
+        <a class="chip chip--hyaku" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=100%E5%86%86%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97+%E5%9F%8E%E4%B8%8B%E5%8D%97"><span
+            class="i">💯</span>100‑yen shops</a>
+      </div>
+      <ul class="poi-list">
+        <li>
+          <span class="poi-name">Takashimaya Kyoto Food Hall (Shijo‑Kawaramachi)</span><span
+            class="poi-badge">depachika</span>
+          <span class="poi-actions"><a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/?api=1&query=Takashimaya+Kyoto+Food+Hall">Open map</a></span>
+        </li>
+        <li>
+          <span class="poi-name">Daimaru Kyoto Food Hall (Shijo‑Karasuma)</span><span class="poi-badge">depachika</span>
+          <span class="poi-actions"><a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/?api=1&query=Daimaru+Kyoto+Food+Hall">Open map</a></span>
+        </li>
+        <li>
+          <span class="poi-name">Fresco Gion</span><span class="poi-badge">supermarket</span>
+          <span class="poi-actions"><a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/?api=1&query=Fresco+Gion">Open map</a></span>
+        </li>
+      </ul>
+
+      <!-- Tokyo — Hotel Sardonyx Ueno -->
+      <h3>Tokyo — Hotel Sardonyx Ueno</h3>
+      <div class="chip-row">
+        <a class="chip chip--drug" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%83%89%E3%83%A9%E3%83%83%E3%82%B0%E3%82%B9%E3%83%88%E3%82%A2+near+Hotel+Sardonyx+Ueno"><span
+            class="i">💊</span>Drugstores</a>
+        <a class="chip chip--pharm" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E8%AA%BF%E5%89%A4%E8%96%AC%E5%B1%80+near+Hotel+Sardonyx+Ueno"><span
+            class="i">🧪</span>Pharmacies</a>
+        <a class="chip chip--super" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC+near+Hotel+Sardonyx+Ueno"><span
+            class="i">🛒</span>Supermarkets</a>
+        <a class="chip chip--konbini" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8B+near+Hotel+Sardonyx+Ueno"><span
+            class="i">🏪</span>Convenience</a>
+        <a class="chip chip--donki" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=%E3%83%89%E3%83%B3%E3%83%BB%E3%82%AD%E3%83%9B%E3%83%BC%E3%83%86+%E4%B8%8A%E9%87%8E"><span
+            class="i">🐧</span>Don Quijote</a>
+        <a class="chip chip--hyaku" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=100%E5%86%86%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97+%E4%B8%8A%E9%87%8E"><span
+            class="i">💯</span>100‑yen shops</a>
+      </div>
+      <ul class="poi-list">
+        <li>
+          <span class="poi-name">Matsuzakaya Ueno Food Hall</span><span class="poi-badge">depachika</span>
+          <span class="poi-actions"><a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/?api=1&query=Matsuzakaya+Ueno+Food+Hall">Open map</a></span>
+        </li>
+        <li>
+          <span class="poi-name">Seijo Ishii Atre Ueno</span><span class="poi-badge">gourmet supermarket</span>
+          <span class="poi-actions"><a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/?api=1&query=Seijo+Ishii+Atr%C3%A9+Ueno">Open map</a></span>
+        </li>
+        <li>
+          <span class="poi-name">My Basket / Maruetsu Petit / Niku no Hanamasa</span><span class="poi-badge">compact
+            supermarkets</span>
+          <span class="poi-actions"><a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/?api=1&query=My+Basket+Ueno">My Basket</a> · <a target="_blank"
+              rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Maruetsu+Petit+Okachimachi">Maruetsu
+              Petit</a> · <a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/?api=1&query=Niku+no+Hanamasa+Ueno">Hanamasa</a></span>
+        </li>
+      </ul>
+
+      <p class="tip">24h convenience: search コンビニ 24時間 near your hotel. Drugstores often close ~21:00–22:00;
+        prescription pharmacies (調剤薬局) keep shorter hours.</p>
+    </section>
+
+
+    <!-- A5 Wagyu near your hotels (value picks) -->
+    <section class="page">
+      <div class="head">
+        <h2 id="wagyu">A5 Wagyu near your hotels (value picks)</h2>
+      </div>
+      <p class="tip">Book early (17:00–17:30) or go at lunch for sets. Ask “A5 はどれですか？” to target true A5 cuts. Share
+        1–2 premium cuts + sides to keep costs down.</p>
+
+      <!-- Osaka — Umeda -->
+      <h3>Osaka — APA Hotel &amp; Resort Ōsaka Umeda‑eki Tower</h3>
+      <div class="chip-row">
+        <a class="chip chip--donki" target="_blank" rel="noopener"
+          href="https://tabelog.com/osaka/rstLst/?sk=A5%20%E5%92%8C%E7%89%9B%20%E7%84%BC%E8%82%89%20%E6%A2%85%E7%94%B0"><span
+            class="i">📊</span>Tabelog near Umeda</a>
+        <a class="chip chip--konbini" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/%E6%A2%85%E7%94%B0+A5+%E5%92%8C%E7%89%9B+%E7%84%BC%E8%82%89/@34.704,135.497,15z"><span
+            class="i">🗺️</span>Maps: 梅田 A5 和牛 焼肉</a>
+      </div>
+      <ul class="rest-list">
+        <li class="rest-item">
+          <div class="rest-top">
+            <span class="rest-name">Matsusakagyu Yakiniku M (Umeda/堂山)</span>
+            <span class="tag">A5 Matsusaka</span><span class="tag">yakiniku</span>
+          </div>
+          <div class="rest-meta">~10–15 min walk · dinner 5,000–9,000 yen pp (à la carte)</div>
+          <div class="rest-actions">
+            <a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/%E6%9D%BE%E9%98%AA%E7%89%9B%E7%84%BC%E8%82%89M+%E6%A2%85%E7%94%B0">Open
+              map</a>
+            <a target="_blank" rel="noopener"
+              href="https://tabelog.com/osaka/rstLst/?sk=%E6%9D%BE%E9%98%AA%E7%89%9B%20M%20%E6%A2%85%E7%94%B0">Tabelog
+              search</a>
+          </div>
+        </li>
+        <li class="rest-item">
+          <div class="rest-top">
+            <span class="rest-name">Rikimaru Umeda Doyama (焼肉 力丸 梅田)</span>
+            <span class="tag">value yakiniku</span><span class="tag">some A4/A5 cuts</span>
+          </div>
+          <div class="rest-meta">~10–12 min walk · 4,000–7,000 yen pp</div>
+          <div class="rest-actions">
+            <a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/%E7%84%BC%E8%82%89+%E5%8A%9B%E4%B8%B8+%E6%A2%85%E7%94%B0">Open
+              map</a>
+            <a target="_blank" rel="noopener"
+              href="https://tabelog.com/osaka/rstLst/?sk=%E7%84%BC%E8%82%89%20%E5%8A%9B%E4%B8%B8%20%E6%A2%85%E7%94%B0">Tabelog
+              search</a>
+          </div>
+        </li>
+        <li class="rest-item">
+          <div class="rest-top">
+            <span class="rest-name">Marutomi Umeda (焼肉 まる富 梅田)</span>
+            <span class="tag">neighborhood yakiniku</span>
+          </div>
+          <div class="rest-meta">~8–12 min walk · 4,000–6,500 yen pp</div>
+          <div class="rest-actions">
+            <a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/%E7%84%BC%E8%82%89+%E3%81%BE%E3%82%8B%E5%AF%8C+%E6%A2%85%E7%94%B0">Open
+              map</a>
+            <a target="_blank" rel="noopener"
+              href="https://tabelog.com/osaka/rstLst/?sk=%E7%84%BC%E8%82%89%20%E3%81%BE%E3%82%8B%E5%AF%8C%20%E6%A2%85%E7%94%B0">Tabelog
+              search</a>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Kyoto — Gion -->
+      <h3>Kyoto — APA Hotel Kyoto Gion EXCELLENT</h3>
+      <div class="chip-row">
+        <a class="chip chip--donki" target="_blank" rel="noopener"
+          href="https://tabelog.com/kyoto/rstLst/?sk=A5%20%E5%92%8C%E7%89%9B%20%E7%84%BC%E8%82%89%20%E7%A5%87%E5%9C%92"><span
+            class="i">📊</span>Tabelog near Gion</a>
+        <a class="chip chip--konbini" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/%E7%A5%87%E5%9C%92+A5+%E5%92%8C%E7%89%9B+%E7%84%BC%E8%82%89/@35.003,135.775,15z"><span
+            class="i">🗺️</span>Maps: 祇園 A5 和牛 焼肉</a>
+      </div>
+      <ul class="rest-list">
+        <li class="rest-item">
+          <div class="rest-top">
+            <span class="rest-name">Steak House Pound Gion (ステーキハウス 听 祇園)</span>
+            <span class="tag">A5 steak</span><span class="tag">dry‑aged</span>
+          </div>
+          <div class="rest-meta">~5–8 min walk · lunch 2,500–4,000 · dinner 6,000–12,000 yen pp</div>
+          <div class="rest-actions">
+            <a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/%E3%82%B9%E3%83%86%E3%83%BC%E3%82%AD%E3%83%8F%E3%82%A6%E3%82%B9+%E5%90%AC+%E7%A5%87%E5%9C%92">Open
+              map</a>
+            <a target="_blank" rel="noopener"
+              href="https://tabelog.com/kyoto/rstLst/?sk=%E3%82%B9%E3%83%86%E3%83%BC%E3%82%AD%E3%83%8F%E3%82%A6%E3%82%B9%20%E8%81%BD%20%E7%A5%87%E5%9C%92">Tabelog
+              search</a>
+          </div>
+        </li>
+        <li class="rest-item">
+          <div class="rest-top">
+            <span class="rest-name">Yakiniku Hiro (焼肉 弘 祇園)</span>
+            <span class="tag">A5 wagyu</span><span class="tag">yakiniku</span>
+          </div>
+          <div class="rest-meta">~10–15 min walk · 5,000–8,000 yen pp</div>
+          <div class="rest-actions">
+            <a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/%E7%84%BC%E8%82%89+%E5%BC%98+%E7%A5%87%E5%9C%92">Open map</a>
+            <a target="_blank" rel="noopener"
+              href="https://tabelog.com/kyoto/rstLst/?sk=%E7%84%BC%E8%82%89%20%E5%BC%98%20%E7%A5%87%E5%9C%92">Tabelog
+              search</a>
+          </div>
+        </li>
+        <li class="rest-item">
+          <div class="rest-top">
+            <span class="rest-name">Yakiniku Yaruki Pontocho (焼肉やる気 先斗町)</span>
+            <span class="tag">A5 options</span><span class="tag">lively</span>
+          </div>
+          <div class="rest-meta">~12–15 min walk · 5,000–8,000 yen pp</div>
+          <div class="rest-actions">
+            <a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/%E7%84%BC%E8%82%89%E3%82%84%E3%82%8B%E6%B0%97+%E5%85%88%E6%96%97%E7%94%BA">Open
+              map</a>
+            <a target="_blank" rel="noopener"
+              href="https://tabelog.com/kyoto/rstLst/?sk=%E7%84%BC%E8%82%89%E3%82%84%E3%82%8B%E6%B0%97%20%E5%85%88%E6%96%97%E7%94%BA">Tabelog
+              search</a>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Tokyo — Ueno -->
+      <h3>Tokyo — Hotel Sardonyx Ueno</h3>
+      <div class="chip-row">
+        <a class="chip chip--donki" target="_blank" rel="noopener"
+          href="https://tabelog.com/tokyo/rstLst/?sk=A5%20%E5%92%8C%E7%89%9B%20%E7%84%BC%E8%82%89%20%E4%B8%8A%E9%87%8E"><span
+            class="i">📊</span>Tabelog near Ueno</a>
+        <a class="chip chip--konbini" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/%E4%B8%8A%E9%87%8E+A5+%E5%92%8C%E7%89%9B+%E7%84%BC%E8%82%89/@35.707,139.777,15z"><span
+            class="i">🗺️</span>Maps: 上野 A5 和牛 焼肉</a>
+      </div>
+      <ul class="rest-list">
+        <li class="rest-item">
+          <div class="rest-top">
+            <span class="rest-name">Yakiniku Panga Okachimachi (焼肉ぱんが 御徒町)</span>
+            <span class="tag">A5 wagyu</span><span class="tag">value</span>
+          </div>
+          <div class="rest-meta">~8–10 min walk · lunch 1,500–2,500 · dinner 5,000–8,000 yen pp</div>
+          <div class="rest-actions">
+            <a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/%E7%84%BC%E8%82%89%E3%81%B1%E3%82%93%E3%81%8C+%E5%BE%A1%E5%BE%92%E7%94%BA">Open
+              map</a>
+            <a target="_blank" rel="noopener"
+              href="https://tabelog.com/tokyo/rstLst/?sk=%E7%84%BC%E8%82%89%E3%81%B1%E3%82%93%E3%81%8C%20%E5%BE%A1%E5%BE%92%E7%94%BA">Tabelog
+              search</a>
+          </div>
+        </li>
+        <li class="rest-item">
+          <div class="rest-top">
+            <span class="rest-name">Ushihachi Ueno/Okachimachi (牛8)</span>
+            <span class="tag">A4/A5 sets</span><span class="tag">yakiniku</span>
+          </div>
+          <div class="rest-meta">~6–10 min walk · 4,500–7,500 yen pp</div>
+          <div class="rest-actions">
+            <a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/%E7%89%9B8+%E5%BE%A1%E5%BE%92%E7%94%BA">Open map</a>
+            <a target="_blank" rel="noopener"
+              href="https://tabelog.com/tokyo/rstLst/?sk=%E7%89%9B8%20%E5%BE%A1%E5%BE%92%E7%94%BA">Tabelog search</a>
+          </div>
+        </li>
+        <li class="rest-item">
+          <div class="rest-top">
+            <span class="rest-name">Toraji Ueno (焼肉トラジ 上野)</span>
+            <span class="tag">chain</span><span class="tag">wagyu cuts</span>
+          </div>
+          <div class="rest-meta">~10–12 min walk · 5,000–8,000 yen pp</div>
+          <div class="rest-actions">
+            <a target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/%E7%84%BC%E8%82%89%E3%83%88%E3%83%A9%E3%82%B8+%E4%B8%8A%E9%87%8E">Open
+              map</a>
+            <a target="_blank" rel="noopener"
+              href="https://tabelog.com/tokyo/rstLst/?sk=%E7%84%BC%E8%82%89%E3%83%88%E3%83%A9%E3%82%B8%20%E4%B8%8A%E9%87%8E">Tabelog
+              search</a>
+          </div>
+        </li>
+      </ul>
+
+      <p class="tip">Most accept cards; smaller Kyoto spots may prefer cash. Ventilation is decent at yakiniku, but
+        expect a bit of grill aroma.</p>
     </section>
 
     <!-- Next steps -->
